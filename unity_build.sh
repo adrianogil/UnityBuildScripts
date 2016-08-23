@@ -34,13 +34,21 @@ setup_commit='private/setup'
 git cherry-pick $setup_commit
 
 # build this commit version
-~/workspace/scripts/unity/UnityBuildScripts/unity_project_build.sh '_'$current_commit
+/Users/SIDIA/workspace/scripts/unity/unity_project_build.sh '_'$current_commit
 
 # Delete Tag
-git tag -d $tag_name && git push $repo :$tag_name
-cd $current_directory
 git tag -d $tag_name
+git push $repo :$tag_name
+cd $current_directory
+
+android_build_directory=$unity_build_directory"/Builds/Android/"
+apk_path=$android_build_directory"*_"$current_commit".apk"
 
 # Notifify script build is finished
 # (using terminal-notifier - installed by using command 'sudo gem install terminal-notifier')
-terminal-notifier -title "Unity Script Build" -message "Build Finished" -execute 'open Builds/Android/'
+if [ -f "$apk_path" ]
+then
+    terminal-notifier -title "Unity Script Build" -message "Build Finished Successfully" -execute 'open Builds/Android/'
+else
+    terminal-notifier -title "Unity Script Build" -message "Build Finished with Errors" -execute 'open Builds/Android/'
+fi
