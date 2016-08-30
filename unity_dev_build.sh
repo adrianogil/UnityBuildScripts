@@ -34,7 +34,7 @@ setup_commit='private/setup'
 git cherry-pick $setup_commit
 
 # build this commit version
-~/workspace/scripts/unity/unity_project_build.sh '_'$current_commit
+~/workspace/scripts/unity/unity_project_dev_build.sh '_'$current_commit
 
 # Delete Tag
 git tag -d $tag_name
