@@ -1,3 +1,11 @@
+# Create Unity Build
+#  - Setup folders
+#
+# Requisites:
+#  - Needs a local repository
+#  - Your current unity project must be a git repository
+#  Usage: Run this command in a directory of your unity project
+#     ./create_unity_build.sh
 repo='local'
 
 # find build directory

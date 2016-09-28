@@ -1,5 +1,7 @@
+
 current_commit=''
 repo=''
+project_build_method=''
 # Verify if the commit was passed as argument
 if [ $# -eq 0 ]
     then
@@ -8,12 +10,21 @@ if [ $# -eq 0 ]
         repo='local'
 else
     current_commit=$1
+
     if [ -z "$2" ]
+    then
+        project_build_method='AutoBuilder.PerformAndroidBuild'
+    else
+        project_build_method=$2
+    fi
+
+    if [ -z "$3" ]
     then
         repo='local'
     else
-        repo=$2
+        repo=$3
     fi
+
 fi
 
 tag_name='temp-unity-build-'$current_commit
@@ -34,7 +45,7 @@ setup_commit='private/setup'
 git cherry-pick $setup_commit
 
 # build this commit version
-~/workspace/scripts/unity/unity_project_build.sh '_'$current_commit
+~/workspace/scripts/unity/UnityBuildScripts/unity_project_build.sh $project_build_method '_'$current_commit
 
 # Delete Tag
 git tag -d $tag_name

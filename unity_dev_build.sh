@@ -1,3 +1,4 @@
+
 current_commit=''
 repo=''
 # Verify if the commit was passed as argument
@@ -14,6 +15,7 @@ else
     else
         repo=$2
     fi
+
 fi
 
 tag_name='temp-unity-build-'$current_commit
