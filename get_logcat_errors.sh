@@ -17,6 +17,6 @@ echo 'Get stats from file: '$log_file
 error_folder=$current_directory"/../logcat-searches/"
 errors_log_file=$error_folder"/logcat_errors_"$current_commit".sublime-search"
 
-python /Users/SIDIA/workspace/scripts/unity/get_logcat_errors.py $log_file $errors_log_file $current_commit
+python ~/workspace/scripts/unity/get_logcat_errors.py $log_file $errors_log_file $current_commit
 echo 'Opening file: '$errors_log_file
 sublime $errors_log_file

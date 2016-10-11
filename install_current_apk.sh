@@ -12,7 +12,7 @@ current_directory=$(pwd)
 unity_build_directory=$current_directory"-unity-build"
 android_build_directory=$unity_build_directory"/Builds/Android/"
 
-apk_path=$android_build_directory*$3"*_"$current_commit".apk"
+apk_path=$android_build_directory*$3"*"$current_commit".apk"
 
 adb install $1 $apk_path
 

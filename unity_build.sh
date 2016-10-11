@@ -2,6 +2,7 @@
 current_commit=''
 repo=''
 project_build_method=''
+unity_app=''
 # Verify if the commit was passed as argument
 if [ $# -eq 0 ]
     then
@@ -20,9 +21,16 @@ else
 
     if [ -z "$3" ]
     then
+        unity_app=''
+    else
+        unity_app=$3
+    fi
+
+    if [ -z "$4" ]
+    then
         repo='local'
     else
-        repo=$3
+        repo=$4
     fi
 
 fi
@@ -45,7 +53,7 @@ setup_commit='private/setup'
 git cherry-pick $setup_commit
 
 # build this commit version
-~/workspace/scripts/unity/UnityBuildScripts/unity_project_build.sh $project_build_method '_'$current_commit
+~/workspace/scripts/unity/UnityBuildScripts/unity_project_build.sh $project_build_method '_'$current_commit $unity_app
 
 # Delete Tag
 git tag -d $tag_name
