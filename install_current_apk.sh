@@ -7,12 +7,19 @@ else
     current_commit=$2
 fi
 
+if [ -z "$3" ]
+then
+    internal_folder=''
+else
+    internal_folder='/'$3
+fi
+
 # Get current directory
 current_directory=$(pwd)
-unity_build_directory=$current_directory"-unity-build"
+unity_build_directory=$current_directory"-unity-build"$internal_folder
 android_build_directory=$unity_build_directory"/Builds/Android/"
 
-apk_path=$android_build_directory*$3"*"$current_commit".apk"
+apk_path=$android_build_directory"*"$current_commit".apk"
 
 adb install $1 $apk_path
 

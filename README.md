@@ -3,6 +3,14 @@ Scripts to build Unity3D projects in background.
 
 All build process runs in a separated folder. So, it doesn't block your current Unity instance.
 
+# Usage
+
+- Clone or download this project
+- Add the lines below to your .bashrc
+` export UNITY_BUILD_SCRIPTS_DIR=/path/to/UnityBuildScripts
+` export PATH=$UNITY_BUILD_SCRIPTS_DIR:$PATH
+
+# Scripts
 This repository contains:
 - create_unity_build - must be called first, you should have a local git repository called 'local'
 - unity_build - must be called every time you have a build to be generated from a specified commit

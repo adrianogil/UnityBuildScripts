@@ -33,6 +33,13 @@ else
         repo=$4
     fi
 
+    if [ -z "$5" ]
+    then
+        internal_folder=''
+    else
+        internal_folder=$5
+    fi
+
 fi
 
 tag_name='temp-unity-build-'$current_commit
@@ -40,7 +47,14 @@ git tag $tag_name $current_commit
 git push $repo $tag_name
 
 current_directory=$(pwd)
-unity_build_directory=$current_directory"-unity-build"
+
+
+if [ -z "$5" ]
+    then
+        unity_build_directory=$current_directory"-unity-build"
+    else
+        unity_build_directory=$current_directory"-unity-build/"$internal_folder
+    fi
 
 # Enter directory of Unity build
 cd $unity_build_directory
@@ -65,9 +79,9 @@ apk_path=$android_build_directory"*_"$current_commit".apk"
 
 # Notifify script build is finished
 # (using terminal-notifier - installed by using command 'sudo gem install terminal-notifier')
-if [ -f "$apk_path" ]
-then
-    terminal-notifier -title "Unity Script Build" -message "Build Finished Successfully" -execute 'open Builds/Android/'
-else
-    terminal-notifier -title "Unity Script Build" -message "Build Finished with Errors" -execute 'open Builds/Android/'
-fi
+# if [ -f "$apk_path" ]
+# then
+#     terminal-notifier -title "Unity Script Build" -message "Build Finished Successfully" -execute 'open Builds/Android/'
+# else
+#     terminal-notifier -title "Unity Script Build" -message "Build Finished with Errors" -execute 'open Builds/Android/'
+# fi

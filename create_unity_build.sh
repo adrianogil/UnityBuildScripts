@@ -22,12 +22,14 @@ current_directory=$(pwd)
 repo_url=$current_directory".git"
 unity_build_directory=$current_directory"-unity-build"
 tools_directory=$current_directory/../tools
-builder_script_directory=$current_directory/Assets/Editor/Build
+builder_script_directory=$unity_build_directory/Assets/Editor/Build
 
-repo_url=$(git remote get-url $repo)
-repo_url=$current_directory'/'$repo_url
+# repo_url=$(git remote get-url $repo)
+# TODO: Verify if it's necessary to setup absolute path of repo_url
+# repo_url=$current_directory'/'$repo_url
 
-echo 'Creating local git repository '$repo_url
+# TODO: A cmdline option to also create a local git
+# echo 'Creating local git repository '$repo_url
 mkdir $repo_url
 cd $repo_url
 git init --bare
@@ -52,9 +54,11 @@ cp -r $UNITY_BUILD_SCRIPTS_DIR/tools $tools_directory
 
 echo "Creating private/setup commit"
 mkdir -p $builder_script_directory
-cp $UNITY_BUILD_SCRIPTS_DIR/AutoBuilder.cs builder_script_directory/
-git add builder_script_directory/AutoBuilder.cs
+cp $UNITY_BUILD_SCRIPTS_DIR/AutoBuilder.cs $builder_script_directory/
+git add $builder_script_directory/AutoBuilder.cs
 git commit -m "Private Setup"
 git tag private/setup
 git push $repo private/setup
-git reset --hard HEAD~1
+# git reset --hard HEAD~1
+
+cd $current_directory
