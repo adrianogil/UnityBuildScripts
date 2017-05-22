@@ -8,7 +8,10 @@ def filter_log(source_log, error_log, commit):
     with open(source_log) as f:
         lines = f.readlines()
 
+    # print('Read ' + str(len(lines)) + ' lines from android logcat')
+
     log_error_text = "Logcat from commit " + commit + "\n\n" + source_log + ":\n"
+    # print(log_error_text)
 
     exception_found = False
 
@@ -22,6 +25,7 @@ def filter_log(source_log, error_log, commit):
         if line.find("Exception") != -1 or line.find("NullReference") != -1:
             log_error_text += "  " + str(line_number) + ": " + line
             exception_found = True
+            print('Found exception')
         line_number = line_number + 1
 
 

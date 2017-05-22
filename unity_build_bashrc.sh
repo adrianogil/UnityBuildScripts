@@ -1,11 +1,12 @@
 
-
 # Useful alias for unity build tools
 alias fix-aar-unity-plugin='~/workspace/scripts/android/aar/fix_aar_unity_plugin.sh '
 alias unity-build='time ~/workspace/scripts/unity/UnityBuildScripts/unity_build.sh'
 alias create-unity-build='~/workspace/scripts/unity/UnityBuildScripts/create_unity_build.sh'
 alias apk-install='~/workspace/scripts/unity/UnityBuildScripts/install_current_apk.sh'
 alias show-build-log-error=${UNITY_BUILD_SCRIPTS_DIR}'/show_build_log_error.sh'
+
+alias rm-build-temp-tags='python '${UNITY_BUILD_SCRIPTS_DIR}'/rm_build_temp_tags.py build'
 
 alias get-logcat=${UNITY_BUILD_SCRIPTS_DIR}'/get_project_logcat.sh'
 alias get-logcat-errors=${UNITY_BUILD_SCRIPTS_DIR}'/get_logcat_errors.sh'
@@ -19,3 +20,12 @@ alias available-devices='python '${UNITY_BUILD_SCRIPTS_DIR}'/get_available_devic
 
 alias run-and-install='../tools/run_and_install.sh'
 alias last-unity-build-error='../tools/show_build_log_error.sh'
+
+alias g='python '$UNITY_BUILD_SCRIPTS_DIR'/commit_build.py'
+
+# Short aliases
+alias r='echo "Unity Build and Run" && ../tools/run_and_install.sh'
+alias i='echo "Installing Current APK" && ../tools/install.sh'
+
+# Test
+alias py-unity-build='python '${UNITY_BUILD_SCRIPTS_DIR}'/unity_build.py'
