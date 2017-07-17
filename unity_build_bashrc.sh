@@ -27,5 +27,23 @@ alias g='python '$UNITY_BUILD_SCRIPTS_DIR'/commit_build.py'
 alias r='echo "Unity Build and Run" && ../tools/run_and_install.sh'
 alias i='echo "Installing Current APK" && ../tools/install.sh'
 
+alias otg='echo "Unity Build and Run" && ../tools/runOTG_and_install.sh'
+
+alias 2d='echo "Unity 2D Build and Run" && ../tools/run2d_and_install.sh'
+alias 2dotg='echo "Unity 2D Build and Run" && ../tools/run2dOTG_and_install.sh'
+
 # Test
 alias py-unity-build='python '${UNITY_BUILD_SCRIPTS_DIR}'/unity_build.py'
+
+# Android
+alias gilcat='adb logcat | grep GilLog'
+
+# Dynamic Unity versions alias
+for file in /Applications/Unity*/ ; do
+  if [[ -d "$file" && ! -L "$file" ]]; then
+    base_file=`basename $file`
+    base_file=${base_file:5}
+    # echo "$base_file is a directory";
+    alias open-unity-${base_file}="${file}/Unity${base_file}.app/Contents/MacOS/Unity -projectPath \$PWD"
+  fi;
+done
