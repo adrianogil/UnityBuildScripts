@@ -47,3 +47,9 @@ for file in /Applications/Unity*/ ; do
     alias open-unity-${base_file}="${file}/Unity${base_file}.app/Contents/MacOS/Unity -projectPath \$PWD"
   fi;
 done
+
+# Android logcat
+alias dlog='device_model=`adb shell getprop ro.product.model`; echo "Device is $device_model"; adb shell logcat -d -v time > log_${device_model}_$(date +%F-%H:%M).txt'
+
+
+
