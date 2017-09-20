@@ -36,7 +36,8 @@ alias 2dotg='echo "Unity 2D Build and Run" && ../tools/run2dOTG_and_install.sh'
 alias py-unity-build='python '${UNITY_BUILD_SCRIPTS_DIR}'/unity_build.py'
 
 # Android
-alias gilcat='adb logcat | grep GilLog'
+alias gilcat='adb log
+cat | grep GilLog'
 
 # Dynamic Unity versions alias
 for file in /Applications/Unity*/ ; do
@@ -50,6 +51,17 @@ done
 
 # Android logcat
 alias dlog='device_model=`adb shell getprop ro.product.model`; echo "Device is $device_model"; adb shell logcat -d -v time > log_${device_model}_$(date +%F-%H:%M).txt'
+# Cat last logcat saved by dlog
+alias getlog='ls -t log_*.txt | head -1'
+alias catlog='ls -t log_*.txt | head -1 | xargs -I {} cat {}'
+alias openlog='ls -t log_*.txt | head -1 | xargs -I {} sublime {}'
+
+function logtext() {
+    ls -t log_*.txt | head -1 | xargs -I {} cat {} | grep $1 | less
+}
+
+# Extract JAR from AAR files in current directory
+alias extract-jar-from='ls *.aar | rev | cut -c5- | rev | xargs -I {}  $UNITY_BUILD_SCRIPTS_DIR/android/aar/extract_jar_from_aar.sh {}'
 
 
 
