@@ -50,7 +50,15 @@ for file in /Applications/Unity*/ ; do
 done
 
 # Android logcat
-alias dlog='device_model=`adb shell getprop ro.product.model`; echo "Device is $device_model"; adb shell logcat -d -v time > log_${device_model}_$(date +%F-%H:%M).txt'
+function dlog()
+{
+    device_model=$(adb shell getprop ro.product.model)
+    echo "Device is $device_model"
+    log_file=log_${device_model}_$(date +%F-%H:%M).txt
+    echo 'Android log saved as '$log_file
+    adb shell logcat -d -v time > $log_file
+}
+
 # Cat last logcat saved by dlog
 alias getlog='ls -t log_*.txt | head -1'
 alias catlog='ls -t log_*.txt | head -1 | xargs -I {} cat {}'
@@ -58,6 +66,11 @@ alias openlog='ls -t log_*.txt | head -1 | xargs -I {} sublime {}'
 
 function logtext() {
     ls -t log_*.txt | head -1 | xargs -I {} cat {} | grep $1 | less
+}
+
+function logexception()
+{
+    ls -t log_*.txt | head -1 | xargs -I {} cat {} | python ${UNITY_BUILD_SCRIPTS_DIR}/android/log/error_log_filter.py | less
 }
 
 # Extract JAR from AAR files in current directory
