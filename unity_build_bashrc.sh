@@ -68,10 +68,17 @@ function logtext() {
     ls -t log_*.txt | head -1 | xargs -I {} cat {} | grep $1 | less
 }
 
+function catexception()
+{
+    ls -t log_*.txt | head -1 | xargs -I {} cat {} | python ${UNITY_BUILD_SCRIPTS_DIR}/android/log/error_log_filter.py
+}
+
 function logexception()
 {
-    ls -t log_*.txt | head -1 | xargs -I {} cat {} | python ${UNITY_BUILD_SCRIPTS_DIR}/android/log/error_log_filter.py | less
+    catexception | less
 }
+
+
 
 # Extract JAR from AAR files in current directory
 alias extract-jar-from='ls *.aar | rev | cut -c5- | rev | xargs -I {}  $UNITY_BUILD_SCRIPTS_DIR/android/aar/extract_jar_from_aar.sh {}'
