@@ -49,6 +49,21 @@ for file in /Applications/Unity*/ ; do
   fi;
 done
 
+# Install Android APK
+function ik()
+{
+    echo 'Searching for APK files ...'
+
+    apk_file=$(find . -name '*.apk' | head -1)
+
+    if [ -z $apk_file ]; then
+        echo 'No APK Found!'
+    else
+        echo 'Found '$apk_file
+        adb install -r $apk_file
+    fi
+}
+
 # Android logcat
 function dlog()
 {
@@ -57,6 +72,8 @@ function dlog()
     log_file=log_${device_model}_$(date +%F-%H:%M).txt
     echo 'Android log saved as '$log_file
     adb shell logcat -d -v time > $log_file
+    number_of_lines=$(cat $log_file | wc -l)
+    echo ''$number_of_lines' lines'
 }
 
 # Cat last logcat saved by dlog
