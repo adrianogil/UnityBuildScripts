@@ -21,3 +21,4 @@ This repository contains:
 
 # Tools
 - get-unity-version-from-proj - get unity version used in a project
+- unity - open project using the best suitable unity version
