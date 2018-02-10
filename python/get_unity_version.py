@@ -3,10 +3,7 @@
 
 import sys, os
 
-if len(sys.argv) > 1:
-    unity_project_dir = sys.argv[1]
-else:
-    unity_project_dir = os.getcwd()
+
 
 
 def get_unity_version_from_project(unity_project_dir):
@@ -24,4 +21,9 @@ def get_unity_version_from_project(unity_project_dir):
 
 
 if __name__ == '__main__':
+    if len(sys.argv) > 1:
+        unity_project_dir = sys.argv[1]
+    else:
+        unity_project_dir = os.getcwd()
+
     print('Found version: ' + get_unity_version_from_project(unity_project_dir))

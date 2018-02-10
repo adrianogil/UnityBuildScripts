@@ -47,6 +47,26 @@ for file in /Applications/Unity*/ ; do
   fi;
 done
 
+function unity()
+{
+    if [ -z "$1" ]
+    then
+        target_directory=$PWD
+    else
+        target_directory=$1
+    fi
+
+    best_unity_version=$(python2 ${UNITY_BUILD_SCRIPTS_DIR}/python/best_installed_unity_version.py $target_directory)
+
+    if [ -z "$best_unity_version" ]
+    then
+        echo 'Not found a suitable version'
+    else
+        echo 'Loading unity version: '$best_unity_version
+        /Applications/Unity$best_unity_version/Unity$best_unity_version.app/Contents/MacOS/Unity -projectPath $target_directory
+    fi
+}
+
 # Extract JAR from AAR files in current directory
 alias extract-jar-from='ls *.aar | rev | cut -c5- | rev | xargs -I {}  $UNITY_BUILD_SCRIPTS_DIR/android/aar/extract_jar_from_aar.sh {}'
 

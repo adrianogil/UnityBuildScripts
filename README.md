@@ -18,3 +18,6 @@ This repository contains:
 - show_build_log_error.sh - show errors of build process related to current commit
 - install_current_apk.sh - install a apk related to a given commit
 - get_project_logcat.sh - get logcat related to current commit
+
+# Tools
+- get-unity-version-from-proj - get unity version used in a project
