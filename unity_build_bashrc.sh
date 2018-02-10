@@ -35,6 +35,7 @@ alias 2dotg='echo "Unity 2D Build and Run" && ../tools/run2dOTG_and_install.sh'
 # Test
 alias py-unity-build='python '${UNITY_BUILD_SCRIPTS_DIR}'/unity_build.py'
 
+alias get-unity-version-from-proj='python2 '${UNITY_BUILD_SCRIPTS_DIR}'/python/get_unity_version.py'
 
 # Dynamic Unity versions alias
 for file in /Applications/Unity*/ ; do
