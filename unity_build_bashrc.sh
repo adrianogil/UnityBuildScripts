@@ -68,6 +68,8 @@ function unity()
     fi
 }
 
+alias u='unity'
+
 # Extract JAR from AAR files in current directory
 alias extract-jar-from='ls *.aar | rev | cut -c5- | rev | xargs -I {}  $UNITY_BUILD_SCRIPTS_DIR/android/aar/extract_jar_from_aar.sh {}'
 
