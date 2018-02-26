@@ -21,16 +21,16 @@ alias available-devices='python '${UNITY_BUILD_SCRIPTS_DIR}'/get_available_devic
 alias run-and-install='../tools/run_and_install.sh'
 alias last-unity-build-error='../tools/show_build_log_error.sh'
 
-alias g='python '$UNITY_BUILD_SCRIPTS_DIR'/commit_build.py'
+# alias g='python '$UNITY_BUILD_SCRIPTS_DIR'/commit_build.py'
 
-# Short aliases
-alias r='echo "Unity Build and Run" && ../tools/run_and_install.sh'
-alias i='echo "Installing Current APK" && ../tools/install.sh'
+# # Short aliases
+# alias r='echo "Unity Build and Run" && ../tools/run_and_install.sh'
+# alias i='echo "Installing Current APK" && ../tools/install.sh'
 
-alias otg='echo "Unity Build and Run" && ../tools/runOTG_and_install.sh'
+# alias otg='echo "Unity Build and Run" && ../tools/runOTG_and_install.sh'
 
-alias 2d='echo "Unity 2D Build and Run" && ../tools/run2d_and_install.sh'
-alias 2dotg='echo "Unity 2D Build and Run" && ../tools/run2dOTG_and_install.sh'
+# alias 2d='echo "Unity 2D Build and Run" && ../tools/run2d_and_install.sh'
+# alias 2dotg='echo "Unity 2D Build and Run" && ../tools/run2dOTG_and_install.sh'
 
 # Test
 alias py-unity-build='python '${UNITY_BUILD_SCRIPTS_DIR}'/unity_build.py'
