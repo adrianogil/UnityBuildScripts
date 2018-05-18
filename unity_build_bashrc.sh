@@ -1,7 +1,7 @@
 
 # Useful alias for unity build tools
 alias fix-aar-unity-plugin='~/workspace/scripts/android/aar/fix_aar_unity_plugin.sh '
-alias unity-build='time ~/workspace/scripts/unity/UnityBuildScripts/unity_build.sh'
+# alias unity-build='time ~/workspace/scripts/unity/UnityBuildScripts/unity_build.sh'
 alias create-unity-build='~/workspace/scripts/unity/UnityBuildScripts/create_unity_build.sh'
 alias apk-install='~/workspace/scripts/unity/UnityBuildScripts/install_current_apk.sh'
 alias show-build-log-error=${UNITY_BUILD_SCRIPTS_DIR}'/show_build_log_error.sh'
@@ -68,7 +68,30 @@ function unity()
     fi
 }
 
+function unity-build()
+{
+    target_directory=$PWD
+
+    if [ -z "$1" ]
+    then
+        build_method='AutoBuilder.PerformAndroidBuild'
+    else
+        build_method=$1
+    fi
+
+    best_unity_version=$(python2 ${UNITY_BUILD_SCRIPTS_DIR}/python/best_installed_unity_version.py $target_directory)
+
+    echo $best_unity_version
+
+    unity_app=/Applications/Unity$best_unity_version/Unity$best_unity_version.app/Contents/MacOS/Unity
+
+    $unity_app -quit -batchmode \
+     -projectPath $target_directory -logFile $target_directory/log_build.txt \
+     -executeMethod $build_method
+}
+
 alias u='unity'
+alias ub='unity-build'
 
 # Extract JAR from AAR files in current directory
 alias extract-jar-from='ls *.aar | rev | cut -c5- | rev | xargs -I {}  $UNITY_BUILD_SCRIPTS_DIR/android/aar/extract_jar_from_aar.sh {}'
