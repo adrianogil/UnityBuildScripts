@@ -64,7 +64,20 @@ function unity()
         echo 'Not found a suitable version'
     else
         echo 'Loading unity version: '$best_unity_version
-        /Applications/Unity$best_unity_version/Unity$best_unity_version.app/Contents/MacOS/Unity -projectPath $target_directory
+
+        if test -n "$STY"
+        then 
+            printf "This is a screen session named '$STY'.\n"
+            /Applications/Unity$best_unity_version/Unity$best_unity_version.app/Contents/MacOS/Unity -projectPath $target_directory
+        else 
+            printf "This is NOT a screen session.\nLet's start a new screen session!" 
+            screen_name=$(basename $PWD)
+            screen_name=$(echo $screen_name | tr '[:upper:]' '[:lower:]')
+
+            screen -S $screen_name -dm /Applications/Unity$best_unity_version/Unity$best_unity_version.app/Contents/MacOS/Unity -projectPath $target_directory
+        fi
+
+        
     fi
 }
 
