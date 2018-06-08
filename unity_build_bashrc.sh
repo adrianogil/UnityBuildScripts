@@ -70,7 +70,7 @@ function unity()
             printf "This is a screen session named '$STY'.\n"
             /Applications/Unity$best_unity_version/Unity$best_unity_version.app/Contents/MacOS/Unity -projectPath $target_directory
         else 
-            printf "This is NOT a screen session.\nLet's start a new screen session!" 
+            printf "This is NOT a screen session.\nLet's start a new screen session!\n" 
             screen_name=$(basename $PWD)
             screen_name=$(echo $screen_name | tr '[:upper:]' '[:lower:]')
 
