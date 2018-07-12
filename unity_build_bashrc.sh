@@ -66,18 +66,18 @@ function unity()
         echo 'Loading unity version: '$best_unity_version
 
         if test -n "$STY"
-        then 
+        then
             printf "This is a screen session named '$STY'.\n"
             /Applications/Unity$best_unity_version/Unity$best_unity_version.app/Contents/MacOS/Unity -projectPath $target_directory
-        else 
-            printf "This is NOT a screen session.\nLet's start a new screen session!\n" 
+        else
+            printf "This is NOT a screen session.\nLet's start a new screen session!\n"
             screen_name=$(basename $PWD)
             screen_name=$(echo $screen_name | tr '[:upper:]' '[:lower:]')
 
             screen -S $screen_name -dm /Applications/Unity$best_unity_version/Unity$best_unity_version.app/Contents/MacOS/Unity -projectPath $target_directory
         fi
 
-        
+
     fi
 }
 
@@ -109,5 +109,4 @@ alias ub='unity-build'
 # Extract JAR from AAR files in current directory
 alias extract-jar-from='ls *.aar | rev | cut -c5- | rev | xargs -I {}  $UNITY_BUILD_SCRIPTS_DIR/android/aar/extract_jar_from_aar.sh {}'
 
-
-
+source $UNITY_BUILD_SCRIPTS_DIR/doxygen/doxygen_bashrc.sh
