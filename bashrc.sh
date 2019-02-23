@@ -73,6 +73,7 @@ function unity()
             printf "This is NOT a screen session.\nLet's start a new screen session!\n"
             screen_name=$(basename $PWD)
             screen_name=$(echo $screen_name | tr '[:upper:]' '[:lower:]')
+            screen_name=${screen_name}-unity
 
             screen -S $screen_name -dm /Applications/Unity$best_unity_version/Unity$best_unity_version.app/Contents/MacOS/Unity -projectPath $target_directory
         fi
@@ -87,7 +88,7 @@ function unity-build()
 
     if [ -z "$1" ]
     then
-        build_method='AutoBuilder.PerformAndroidBuild'
+        build_method='UnityBuilder.BuildVRMode'
     else
         build_method=$1
     fi
