@@ -19,7 +19,7 @@ stats_log_file=$log_folder"/logcat_internal_profiler_"$current_commit".txt"
 
 mkdir $stats_folder
 
-python /Users/SIDIA/workspace/scripts/unity/UnityBuildScripts/get_internal_profiler.py $log_file $stats_log_file
+python $HOME/workspace/scripts/unity/UnityBuildScripts/get_internal_profiler.py $log_file $stats_log_file
 echo 'Opening file: '$stats_log_file
 sublime $stats_log_file
 

@@ -7,6 +7,6 @@ then
     current_commit=$(git log --pretty=format:'%h' -n 1)
 fi
 
-time /Users/SIDIA/workspace/scripts/unity/unity_dev_build.sh $current_commit
+time $HOME/workspace/scripts/unity/unity_dev_build.sh $current_commit
 
 ../tools/dev_install.sh $current_commit
