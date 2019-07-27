@@ -11,7 +11,7 @@ def is_int(s):
         return True
     except ValueError:
         pass
- 
+
     return False
 
 def adjust_version_number(i):
@@ -37,13 +37,13 @@ def convert_number(s):
 
 unity_versions = []
 
-unity_main_path = '/Applications/'
+unity_main_path = '/Applications/UnityApps/'
 
 # Get all version of Unity already installed
 files = [f for f in os.listdir(unity_main_path)]
 for f in files:
     for i in xrange(0, len(f)-5):
-        if f[i:i+5] == 'Unity': 
+        if f[i:i+5] == 'Unity':
             unity_versions.append(f[i+5:])
 
 # Get Unity project path

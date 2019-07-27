@@ -5,7 +5,7 @@ alias unity-version='python2 '${UNITY_BUILD_SCRIPTS_DIR}'/python/get_unity_versi
 alias unv='unity-version'
 
 # Dynamic Unity versions alias
-for file in /Applications/Unity*/ ; do
+for file in /Applications/UnityApps/Unity*/ ; do
   if [[ -d "$file" && ! -L "$file" ]]; then
     base_file=`basename $file`
     base_file=${base_file:5}
@@ -35,7 +35,7 @@ function unity()
         if test -n "$STY"
         then
             printf "This is a screen session named '$STY'.\n"
-            /Applications/Unity$best_unity_version/Unity$best_unity_version.app/Contents/MacOS/Unity -projectPath $target_directory
+            /Applications/UnityApps/Unity$best_unity_version/Unity$best_unity_version.app/Contents/MacOS/Unity -projectPath $target_directory
         else
             printf "This is NOT a screen session.\nLet's start a new screen session!\n"
             screen_name=$(basename $PWD)
@@ -46,7 +46,7 @@ function unity()
                 screen_name=${screen_name}-unity
             fi
 
-            screen -S $screen_name -dm /Applications/Unity$best_unity_version/Unity$best_unity_version.app/Contents/MacOS/Unity -projectPath $target_directory
+            screen -S $screen_name -dm /Applications/UnityApps/Unity$best_unity_version/Unity$best_unity_version.app/Contents/MacOS/Unity -projectPath $target_directory
         fi
 
 
@@ -63,7 +63,7 @@ function unity-build()
 
     echo $best_unity_version
 
-    unity_app=/Applications/Unity$best_unity_version/Unity$best_unity_version.app/Contents/MacOS/Unity
+    unity_app=/Applications/UnityApps/Unity$best_unity_version/Unity$best_unity_version.app/Contents/MacOS/Unity
 
     $unity_app -quit -batchmode \
      -projectPath $target_directory -logFile $target_directory/log_build.txt \
