@@ -1,19 +1,17 @@
 
+export UNITY_HUB_APPS_DIR=/Applications/Unity/Hub/Editor
 source $UNITY_BUILD_SCRIPTS_DIR/doxygen/doxygen_bashrc.sh
 
-alias unity-version='python2 '${UNITY_BUILD_SCRIPTS_DIR}'/python/get_unity_version.py'
+alias unity-version='python3 '${UNITY_BUILD_SCRIPTS_DIR}'/python/get_unity_version.py'
 alias unv='unity-version'
 
 # Dynamic Unity versions alias
-for file in /Applications/UnityApps/Unity*/ ; do
+for file in ${UNITY_HUB_APPS_DIR}/*/ ; do
   if [[ -d "$file" && ! -L "$file" ]]; then
     base_file=`basename $file`
-    base_file=${base_file:5}
-    # echo "$base_file is a directory";
-    alias open-unity-${base_file}="${file}/Unity${base_file}.app/Contents/MacOS/Unity -projectPath \$PWD"
+    alias open-unity-${base_file}="${file}/Unity.app/Contents/MacOS/Unity -projectPath \$PWD"
   fi;
 done
-
 
 function unity()
 {
@@ -24,7 +22,7 @@ function unity()
         target_directory=$1
     fi
 
-    best_unity_version=$(python2 ${UNITY_BUILD_SCRIPTS_DIR}/python/best_installed_unity_version.py $target_directory)
+    best_unity_version=$(python3 ${UNITY_BUILD_SCRIPTS_DIR}/python/best_installed_unity_version.py $target_directory)
 
     if [ -z "$best_unity_version" ]
     then
@@ -35,7 +33,7 @@ function unity()
         if test -n "$STY"
         then
             printf "This is a screen session named '$STY'.\n"
-            /Applications/UnityApps/Unity$best_unity_version/Unity$best_unity_version.app/Contents/MacOS/Unity -projectPath $target_directory
+            ${UNITY_HUB_APPS_DIR}/${best_unity_version}/Unity.app/Contents/MacOS/Unity -projectPath $target_directory
         else
             printf "This is NOT a screen session.\nLet's start a new screen session!\n"
             screen_name=$(basename $PWD)
@@ -46,7 +44,7 @@ function unity()
                 screen_name=${screen_name}-unity
             fi
 
-            screen -S $screen_name -dm /Applications/UnityApps/Unity$best_unity_version/Unity$best_unity_version.app/Contents/MacOS/Unity -projectPath $target_directory
+            screen -S $screen_name -dm ${UNITY_HUB_APPS_DIR}/${best_unity_version}/Unity.app/Contents/MacOS/Unity -projectPath $target_directory
         fi
 
 
@@ -59,11 +57,11 @@ function unity-build()
 
     build_method=$1
 
-    best_unity_version=$(python2 ${UNITY_BUILD_SCRIPTS_DIR}/python/best_installed_unity_version.py $target_directory)
+    best_unity_version=$(python3 ${UNITY_BUILD_SCRIPTS_DIR}/python/best_installed_unity_version.py $target_directory)
 
-    echo $best_unity_version
+    echo "Using Unity "$best_unity_version
 
-    unity_app=/Applications/UnityApps/Unity$best_unity_version/Unity$best_unity_version.app/Contents/MacOS/Unity
+    unity_app=${UNITY_HUB_APPS_DIR}/${best_unity_version}/Unity.app/Contents/MacOS/Unity
 
     $unity_app -quit -batchmode \
      -projectPath $target_directory -logFile $target_directory/log_build.txt \

@@ -25,7 +25,7 @@ def convert_number(s):
 
     last_parsed_number = ''
 
-    for i in xrange(1, len(s)):
+    for i in range(1, len(s)):
         if is_int(s[:i]):
             last_parsed_number = s[:i]
         else:
@@ -37,14 +37,12 @@ def convert_number(s):
 
 unity_versions = []
 
-unity_main_path = '/Applications/UnityApps/'
+unity_main_path = os.environ["UNITY_HUB_APPS_DIR"]
 
 # Get all version of Unity already installed
 files = [f for f in os.listdir(unity_main_path)]
 for f in files:
-    for i in xrange(0, len(f)-5):
-        if f[i:i+5] == 'Unity':
-            unity_versions.append(f[i+5:])
+    unity_versions.append(f)
 
 # Get Unity project path
 if len(sys.argv) > 1:

@@ -1,9 +1,6 @@
 # Get Unity Version in current project
-# Usage python2 get_unity_version.py [<dir>]
-
+# Usage python3 get_unity_version.py [<dir>]
 import sys, os
-
-
 
 
 def get_unity_version_from_project(unity_project_dir):
@@ -14,7 +11,7 @@ def get_unity_version_from_project(unity_project_dir):
             lines = f.readlines()
 
     for line in lines:
-        for i in xrange(0, len(line)-8):
+        for i in range(0, len(line)-8):
             line = line.strip()
             if 'ersion: ' in line[i:i+8]:
                 return line[i+8:]
