@@ -21,7 +21,13 @@ function unity_doxygen_abspath() {
 # Doxygen
 function doxygen-unity()
 {
-    doxygen_bin=/Applications/Doxygen.app/Contents/Resources/doxygen
+    if [[ -d "$doxygen_bin" && ! -L "$doxygen_bin" ]]; then
+        echo "Using doxygen installed in Applications folder"
+        doxygen_bin=/Applications/Doxygen.app/Contents/Resources/doxygen
+    else
+        echo "Using doxygen installed by brew"
+        doxygen_bin=doxygen 
+    fi
 
     doxygen_config_file=DoxyfileUnity
     doxygen_default_config=$UNITY_BUILD_SCRIPTS_DIR/doxygen/$doxygen_config_file
