@@ -51,6 +51,44 @@ function unity()
     fi
 }
 
+function unity-fz()
+{
+    if [ -z "$1" ]
+    then
+        target_directory=$PWD
+    else
+        target_directory=$1
+    fi
+
+    best_unity_version=$(ls ${UNITY_HUB_APPS_DIR} | sk)
+
+    if [ -z "$best_unity_version" ]
+    then
+        echo 'Not found a suitable version'
+    else
+        echo 'Loading unity version: '$best_unity_version
+
+        if test -n "$STY"
+        then
+            printf "This is a screen session named '$STY'.\n"
+            ${UNITY_HUB_APPS_DIR}/${best_unity_version}/Unity.app/Contents/MacOS/Unity -projectPath $target_directory
+        else
+            printf "This is NOT a screen session.\nLet's start a new screen session!\n"
+            screen_name=$(basename $PWD)
+            screen_name=$(echo $screen_name | tr '[:upper:]' '[:lower:]')
+            if [[ $screen_name == *"nity"* ]]; then
+                screen_name=${screen_name}
+            else
+                screen_name=${screen_name}-unity
+            fi
+
+            screen -S $screen_name -dm ${UNITY_HUB_APPS_DIR}/${best_unity_version}/Unity.app/Contents/MacOS/Unity -projectPath $target_directory
+        fi
+
+
+    fi
+}
+
 function unity-build()
 {
     target_directory=$PWD
@@ -80,6 +118,7 @@ function unity-build-android()
 }
 
 alias u='unity'
+alias ufz='unity-fz'
 alias ub='unity-build'
 
 # Extract JAR from AAR files in current directory

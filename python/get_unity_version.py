@@ -1,5 +1,5 @@
 # Get Unity Version in current project
-# Usage python3 get_unity_version.py [<dir>]
+# Usage: python3 get_unity_version.py [<dir>]
 import sys, os
 
 
