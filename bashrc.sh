@@ -61,13 +61,13 @@ function unity-fz()
         target_directory=$1
     fi
 
-    best_unity_version=$(ls ${UNITY_HUB_APPS_DIR} | sk)
+    best_unity_version=$(ls ${UNITY_HUB_APPS_DIR} | default-fuzzy-finder)
 
     if [ -z "$best_unity_version" ]
     then
         echo 'Not found a suitable version'
     else
-        echo 'Loading unity version: '$best_unity_version
+        # echo 'Loading unity version: '$best_unity_version
 
         if test -n "$STY"
         then
@@ -82,9 +82,17 @@ function unity-fz()
                 screen_name=${screen_name}-unity
             fi
 
-            printf "Started a new screen session: "${screen_name}
+            target_platform=$(echo -e "Standalone\niOS\nAndroid\nCurrent" | default-fuzzy-finder)
 
-            screen -S $screen_name -dm ${UNITY_HUB_APPS_DIR}/${best_unity_version}/Unity.app/Contents/MacOS/Unity -projectPath $target_directory
+            echo "Open project using Unity "${best_unity_version}" and platform "${target_platform}
+            echo "Started a new screen session: "${screen_name}
+
+            if [ "$target_platform" = "Current" ]; then
+                screen -S $screen_name -dm ${UNITY_HUB_APPS_DIR}/${best_unity_version}/Unity.app/Contents/MacOS/Unity -projectPath $target_directory
+            else
+                screen -S $screen_name -dm ${UNITY_HUB_APPS_DIR}/${best_unity_version}/Unity.app/Contents/MacOS/Unity -projectPath $target_directory -buildTarget ${target_platform}
+            fi
+            
         fi
 
 
