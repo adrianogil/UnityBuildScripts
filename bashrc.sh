@@ -35,7 +35,6 @@ function unity()
             printf "This is a screen session named '$STY'.\n"
             ${UNITY_HUB_APPS_DIR}/${best_unity_version}/Unity.app/Contents/MacOS/Unity -projectPath $target_directory
         else
-            printf "This is NOT a screen session.\nLet's start a new screen session!\n"
             screen_name=$(basename $PWD)
             screen_name=$(echo $screen_name | tr '[:upper:]' '[:lower:]')
             if [[ $screen_name == *"nity"* ]]; then
@@ -43,6 +42,8 @@ function unity()
             else
                 screen_name=${screen_name}-unity
             fi
+
+            printf "Started a new screen session: "${screen_name}
 
             screen -S $screen_name -dm ${UNITY_HUB_APPS_DIR}/${best_unity_version}/Unity.app/Contents/MacOS/Unity -projectPath $target_directory
         fi
@@ -73,7 +74,6 @@ function unity-fz()
             printf "This is a screen session named '$STY'.\n"
             ${UNITY_HUB_APPS_DIR}/${best_unity_version}/Unity.app/Contents/MacOS/Unity -projectPath $target_directory
         else
-            printf "This is NOT a screen session.\nLet's start a new screen session!\n"
             screen_name=$(basename $PWD)
             screen_name=$(echo $screen_name | tr '[:upper:]' '[:lower:]')
             if [[ $screen_name == *"nity"* ]]; then
@@ -81,6 +81,8 @@ function unity-fz()
             else
                 screen_name=${screen_name}-unity
             fi
+
+            printf "Started a new screen session: "${screen_name}
 
             screen -S $screen_name -dm ${UNITY_HUB_APPS_DIR}/${best_unity_version}/Unity.app/Contents/MacOS/Unity -projectPath $target_directory
         fi
