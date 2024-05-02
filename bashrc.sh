@@ -6,12 +6,18 @@ alias unity-version='python3 '${UNITY_BUILD_SCRIPTS_DIR}'/python/get_unity_versi
 alias unv='unity-version'
 
 # Dynamic Unity versions alias
-for file in ${UNITY_HUB_APPS_DIR}/*/ ; do
-  if [[ -d "$file" && ! -L "$file" ]]; then
-    base_file=`basename $file`
-    alias open-unity-${base_file}="${file}/Unity.app/Contents/MacOS/Unity -projectPath \$PWD"
-  fi;
-done
+# Check if there is any Unity folder in UNITY_HUB_APPS_DIR
+if [ ! "$(ls -A ${UNITY_HUB_APPS_DIR})" ]; then
+    # echo "No Unity editor is installed"
+else
+    for file in ${UNITY_HUB_APPS_DIR}/*/ ; do
+        if [[ -d "$file" && ! -L "$file" ]]; then
+            base_file=`basename $file`
+            alias open-unity-${base_file}="${file}/Unity.app/Contents/MacOS/Unity -projectPath \$PWD"
+        fi;
+    done
+fi
+
 
 function unity()
 {
@@ -20,6 +26,12 @@ function unity()
         target_directory=$PWD
     else
         target_directory=$1
+    fi
+
+    # Check if there is any Unity folder in UNITY_HUB_APPS_DIR
+    if [ ! "$(ls -A ${UNITY_HUB_APPS_DIR})" ]; then
+        echo "No Unity editor is installed"
+        return
     fi
 
     best_unity_version=$(python3 ${UNITY_BUILD_SCRIPTS_DIR}/python/best_installed_unity_version.py $target_directory)
@@ -92,7 +104,7 @@ function unity-fz()
             else
                 screen -S $screen_name -dm ${UNITY_HUB_APPS_DIR}/${best_unity_version}/Unity.app/Contents/MacOS/Unity -projectPath $target_directory -buildTarget ${target_platform}
             fi
-            
+
         fi
 
 
